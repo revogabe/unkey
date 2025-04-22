@@ -19,27 +19,29 @@ export async function task<T>(
   }
 }
 
-
-export async function run(
-  cmd: string,
-  opts?: { cwd?: string; verbose?: boolean }
-) {
+export async function run(cmd: string, opts?: { cwd?: string; verbose?: boolean }) {
   const cwd = opts?.cwd;
   const verbose = Boolean(opts?.verbose);
 
-  if (verbose) { return console.log(`\n> ${cmd}`) }
+  if (verbose) {
+    return console.log(`\n> ${cmd}`);
+  }
 
   await new Promise<void>((resolve, reject) => {
     const p = exec(cmd, { cwd });
 
     if (p.stdout) {
       p.stdout.on("data", (chunk) => {
-        if (verbose) { process.stdout.write(chunk); }
+        if (verbose) {
+          process.stdout.write(chunk);
+        }
       });
     }
     if (p.stderr) {
       p.stderr.on("data", (chunk) => {
-        if (verbose) { process.stderr.write(chunk); }
+        if (verbose) {
+          process.stderr.write(chunk);
+        }
       });
     }
 

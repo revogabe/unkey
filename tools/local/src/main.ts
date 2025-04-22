@@ -17,7 +17,9 @@ args.forEach((arg) => {
 const isVerbose = Boolean(passedOptions.verbose);
 
 function logVerbose(message: string) {
-  if (isVerbose) { return console.log(message); }
+  if (isVerbose) {
+    return console.log(message);
+  }
 }
 
 async function main() {
@@ -72,7 +74,10 @@ async function main() {
       });
 
       logVerbose("Starting dev server...");
-      execSync(`pnpm --dir=apps/${app} dev`, { cwd: path.join(__dirname, "../../.."), stdio: "inherit" });
+      execSync(`pnpm --dir=apps/${app} dev`, {
+        cwd: path.join(__dirname, "../../.."),
+        stdio: "inherit",
+      });
     }
 
     clack.outro("Done");
@@ -86,12 +91,12 @@ async function main() {
   }
 }
 
-process.on('unhandledRejection', (reason) => {
-  console.error('Unhandled Rejection:', reason);
+process.on("unhandledRejection", (reason) => {
+  console.error("Unhandled Rejection:", reason);
   process.exit(1);
 });
-process.on('uncaughtException', (error) => {
-  console.error('Uncaught Exception:', error);
+process.on("uncaughtException", (error) => {
+  console.error("Uncaught Exception:", error);
   process.exit(1);
 });
 
